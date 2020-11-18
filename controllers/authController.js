@@ -50,3 +50,15 @@ exports.autenticarUsuario = async (req, res) => {
     
     }
 }
+
+
+//Obtiene que usuario esta autenticado
+exports.usuarioAutenticado = async (req, res) => {
+    try {
+        const usuario = await Usuario.findById(req.usuario.id).select('-password');
+        res.json({usuario});
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
